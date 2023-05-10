@@ -12,13 +12,13 @@ public class JsonTest {
     private ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    void jsonLaptopsTest() throws  Exception{
-        try(InputStream is = getClass().getClassLoader().getResourceAsStream("laptops.json");
-            InputStreamReader isr = new InputStreamReader(is)
-        ){
+    void jsonLaptopsTest() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("laptops.json");
+             InputStreamReader isr = new InputStreamReader(is)
+        ) {
             LaptopsData laptopsData = objectMapper.readValue(isr, LaptopsData.class);
-            Assertions.assertEquals("512 gb", laptopsData.getSsd ().get(0));
-            Assertions.assertEquals("16 gb", laptopsData.getRam().getGrey ());
+            Assertions.assertEquals("512 gb", laptopsData.getSsd().get(0));
+            Assertions.assertEquals("16 gb", laptopsData.getRam().getGrey());
         }
     }
 }

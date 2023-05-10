@@ -18,7 +18,7 @@ public class ZipTest {
     private String zipName = "testfiles.zip";
     private String csvName = "TestCsv.csv";
     private String xlsxName = "TestExcel.xlsx";
-    private String [] expectedCsv = new String[]{"market", "stock"};
+    private String[] expectedCsv = new String[]{"market", "stock"};
     private String expectedXls = "Excel page testing";
     private String pdfExpectedAuthor = "Федор Михайлович Достоевский";
     private String pdfExpectedTitle = "Преступление и наказание";
@@ -44,12 +44,12 @@ public class ZipTest {
 
     @Test
     void xlsxTest() throws Exception {
-        try (InputStream is = cl.getResourceAsStream(zipName)){
+        try (InputStream is = cl.getResourceAsStream(zipName)) {
             ZipInputStream zip = new ZipInputStream(is);
             ZipEntry entry;
-            while((entry = zip.getNextEntry()) != null){
-                if(entry.getName().equals(xlsxName)){
-                    XLS xls = new XLS( zip);
+            while ((entry = zip.getNextEntry()) != null) {
+                if (entry.getName().equals(xlsxName)) {
+                    XLS xls = new XLS(zip);
                     Assertions.assertEquals(expectedXls, xls.excel.getSheetAt(1)
                             .getRow(4).getCell(3).toString());
                 }
@@ -58,12 +58,12 @@ public class ZipTest {
     }
 
     @Test
-    void pdfTest() throws  Exception{
-        try(InputStream is = cl.getResourceAsStream(zipName)){
+    void pdfTest() throws Exception {
+        try (InputStream is = cl.getResourceAsStream(zipName)) {
             ZipInputStream zip = new ZipInputStream(is);
             ZipEntry entry;
-            while((entry = zip.getNextEntry()) != null){
-                if(entry.getName().contains("pdf")){
+            while ((entry = zip.getNextEntry()) != null) {
+                if (entry.getName().contains("pdf")) {
                     PDF pdf = new PDF(zip);
                     Assertions.assertEquals(pdfExpectedAuthor, pdf.author);
                     Assertions.assertEquals(pdfExpectedTitle, pdf.title);
